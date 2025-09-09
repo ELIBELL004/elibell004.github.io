@@ -13,31 +13,64 @@
     <style>
         body {
             font-family: 'Roboto Mono', monospace;
-            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="18" viewBox="0 0 10 18"><path fill="rgb(220, 38, 38)" d="M0 0h2v18H0z"/></svg>') 5 9, auto;
         }
+
+
         ::selection {
-            background-color: #dc2626;
+            background-color: #06b6d4;
             color: #111827;
+        }
+
+        /* Custom cursor styling for the whole page */
+        body {
+            cursor: none;
+        }
+
+        .custom-cursor {
+            position: fixed;
+            width: 12px;
+            height: 20px;
+            background-color: #06b6d4;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            animation: blink 1s step-start 0s infinite;
         }
     </style>
 </head>
-<body class="bg-gray-900 text-red-500 leading-relaxed">
+<body class="bg-gray-950 text-cyan-400 leading-relaxed">
+
+    <!-- Custom Cursor -->
+    <div class="custom-cursor"></div>
+    <script>
+        const cursor = document.querySelector('.custom-cursor');
+        document.addEventListener('mousemove', e => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+        document.addEventListener('mousedown', () => cursor.style.animation = 'none');
+        document.addEventListener('mouseup', () => cursor.style.animation = 'blink 1s step-start 0s infinite');
+    </script>
+
 
     <!-- Header & Navigation -->
-    <header class="bg-gray-800 shadow-lg sticky top-0 z-50">
+    <header class="bg-gray-900 shadow-lg sticky top-0 z-50">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-3xl font-bold">elias@portfolio:<span class="animate-pulse">_</span></a>
+            <a href="#" class="text-3xl font-bold">elias@portfolio:<span class="text-cyan-400 animate-pulse">_</span></a>
             <div class="flex space-x-6 text-lg">
                 <a href="#about" class="hover:text-white transition duration-300">&gt; about</a>
                 <a href="#skills" class="hover:text-white transition duration-300">&gt; skills</a>
                 <a href="#projects" class="hover:text-white transition duration-300">&gt; projects</a>
-                <a href="#contact" class="hover:text-white transition duration-300">&gt; contact</a>
+                <a href="#certifications" class="hover:text-white transition duration-300">&gt; certs</a>
             </div>
         </nav>
     </header>
 
     <main class="container mx-auto px-6 py-12">
-
+        <!-- Profile Image -->
+        <div class="flex justify-center mb-10">
+            <img class="w-48 h-48 md:w-56 md:h-56 rounded-full border-4 border-cyan-400 shadow-lg" src="https://media.discordapp.net/attachments/895489678483025991/1415117306672976003/image.png?ex=68c20a31&is=68c0b8b1&hm=2f4488a829aa234df5fa30436c45e9c0143adbde10652ceae684765c723b84bf&=&format=webp&quality=lossless" alt="Elias Safi profile picture">
+        </div>
         <!-- About Section -->
         <section id="about" class="py-20">
             <div class="max-w-4xl mx-auto">
@@ -59,24 +92,23 @@
                 <h3 class="text-4xl font-bold mb-6">My Skills</h3>
                 <div class="grid md:grid-cols-2 gap-8">
                     <!-- Skill Card 1: Cybersecurity -->
-                    <div class="border border-red-500 p-6 rounded-lg bg-gray-800">
+                    <div class="border border-cyan-400 p-6 rounded-lg bg-gray-900">
                         <span class="text-gray-500">elias@portfolio</span>:<span class="text-white">~/skills</span>$ list --cybersecurity<br>
                         <ul class="list-disc list-inside mt-2">
-                            <li>Network Security</li>
-                            <li>Threat Detection</li>
-                            <li>Risk Analysis</li>
-                            <li>Penetration Testing (CTFs)</li>
-                            <li>Digital Forensics</li>
+                            <li>Wireshark, Metasploit, Nessus, Snort, Splunk, Burp</li>
+                            <li>Network Administration: TCP/IP, DNS, DHCP</li>
+                            <li>Cloud Services: AWS, Azure, Google Cloud</li>
                         </ul>
                     </div>
                     <!-- Skill Card 2: IT and Programming -->
-                    <div class="border border-red-500 p-6 rounded-lg bg-gray-800">
+                    <div class="border border-cyan-400 p-6 rounded-lg bg-gray-900">
                         <span class="text-gray-500">elias@portfolio</span>:<span class="text-white">~/skills</span>$ list --programming<br>
                         <ul class="list-disc list-inside mt-2">
                             <li>Python (Preferred)</li>
                             <li>C++</li>
                             <li>Java</li>
                             <li>SQL</li>
+                            <li>Proficient in command line interfaces</li>
                         </ul>
                     </div>
                 </div>
@@ -87,44 +119,46 @@
         <section id="projects" class="py-20">
             <div class="max-w-4xl mx-auto">
                 <h3 class="text-4xl font-bold mb-6">My Projects</h3>
-                <p class="mb-4">
-                    <span class="text-gray-500">elias@portfolio</span>:<span class="text-white">~/projects</span>$ git status<br>
-                    All my projects are up-to-date on GitHub. Visit my profile to see my work in cybersecurity and more.
-                </p>
+                <div class="space-y-8">
+                    <p class="mb-4">
+                        <span class="text-gray-500">elias@portfolio</span>:<span class="text-white">~/projects</span>$ cat passwordchecker.txt<br>
+                        <a href="https://github.com/ELIBELL004/passwordchecker" target="_blank" class="hover:underline">**Password Quality Checker:**</a> A Python tool that evaluates password strength based on various security parameters.
+                    </p>
+                    <p class="mb-4">
+                        <span class="text-gray-500">elias@portfolio</span>:<span class="text-white">~/projects</span>$ cat vulnerabilityscanner.txt<br>
+                        <a href="https://github.com/ELIBELL004/PROJECT" target="_blank" class="hover:underline">**Vulnerability Scanner:**</a> A Python tool to identify and report vulnerabilities in network and web applications.
+                    </p>
+                    <p class="mb-4">
+                        <span class="text-gray-500">elias@portfolio</span>:<span class="text-white">~/projects</span>$ cat anomaly.detector.txt<br>
+                        <a href="https://github.com/ELIBELL004/NAD" target="_blank" class="hover:underline">**Network Anomaly Detector:**</a> A Python tool designed to capture network packets from your chosen interface.
+                    </p>
+                </div>
                 <a href="https://github.com/ELIBELL004" target="_blank" rel="noopener noreferrer"
-                   class="inline-block border border-red-500 text-red-500 font-semibold py-3 px-6 rounded-full hover:bg-red-500 hover:text-gray-900 transition duration-300">
-                    &gt; View GitHub Profile
+                   class="inline-block border border-cyan-400 text-cyan-400 font-semibold py-3 px-6 rounded-full hover:bg-cyan-400 hover:text-gray-900 transition duration-300 mt-8">
+                    &gt; View All Projects on GitHub
                 </a>
             </div>
         </section>
-
-        <!-- Contact Section -->
-        <section id="contact" class="py-20">
+        
+        <!-- Certifications Section -->
+        <section id="certifications" class="py-20">
             <div class="max-w-4xl mx-auto">
-                <h3 class="text-4xl font-bold mb-6">Connect with me</h3>
-                <p class="mb-4">
-                    <span class="text-gray-500">elias@portfolio</span>:<span class="text-white">~</span>$ mail -s "Collaboration" elias@example.com<br>
-                    Always looking for opportunities to collaborate and learn from others. Let's connect!
-                </p>
-                <div class="flex space-x-6 text-2xl">
-                    <a href="mailto:elias@example.com" class="hover:text-white transition duration-300">
-                        <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
-                        </svg>
-                    </a>
-                    <a href="https://github.com/ELIBELL004" target="_blank" rel="noopener noreferrer" class="hover:text-white transition duration-300">
-                        <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" d="M10 0C4.477 0 0 4.484 0 10.017c0 4.414 2.865 8.163 6.843 9.488.5.09.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.372-1.34-3.372-1.34-.455-1.157-1.11-1.465-1.11-1.465-.908-.62.069-.608.069-.608 1.004.07 1.532 1.03 1.532 1.03.89 1.529 2.336 1.087 2.903.834.091-.648.349-1.087.633-1.336-2.227-.253-4.567-1.114-4.567-4.964 0-1.096.39-1.993 1.03-2.69a3.6 3.6 0 01.1-2.639s.84-.268 2.75 1.026c.799-.222 1.649-.333 2.5-.333s1.701.111 2.5.333c1.909-1.294 2.748-1.026 2.748-1.026.155.394.275.918.349 1.488.641.698 1.03 1.594 1.03 2.69 0 3.86-.54 4.707-4.577 4.956.35.303.676.91.676 1.841 0 1.336-.012 2.415-.012 2.741 0 .268.18.577.687.487C17.135 18.18 20 14.431 20 10.017c0-5.533-4.477-10.017-10-10.017z" clip-rule="evenodd"></path>
-                        </svg>
-                    </a>
+                <h3 class="text-4xl font-bold mb-6">Certifications</h3>
+                <div class="border border-cyan-400 p-6 rounded-lg bg-gray-900">
+                    <span class="text-gray-500">elias@portfolio</span>:<span class="text-white">~/certifications</span>$ ls<br>
+                    <ul class="list-disc list-inside mt-2">
+                        <li>NVIDIA AI for All: From Basics to GenAI Practice</li>
+                        <li>NVIDIA Bright Cluster Manager Basic Administration</li>
+                        <li>Career Essentials in Cybersecurity by Microsoft and LinkedIn</li>
+                        <li>Google Cybersecurity Professional Certificate</li>
+                    </ul>
                 </div>
             </div>
         </section>
-
     </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-gray-600 text-center py-6 mt-12 text-sm">
+    <footer class="bg-gray-950 text-gray-600 text-center py-6 mt-12 text-sm">
         <p>&gt; Press any key to continue...</p>
     </footer>
 
