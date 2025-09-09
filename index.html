@@ -15,43 +15,13 @@
             font-family: 'Roboto Mono', monospace;
         }
 
-
         ::selection {
             background-color: #06b6d4;
             color: #111827;
         }
-
-        /* Custom cursor styling for the whole page */
-        body {
-            cursor: none;
-        }
-
-        .custom-cursor {
-            position: fixed;
-            width: 12px;
-            height: 20px;
-            background-color: #06b6d4;
-            pointer-events: none;
-            z-index: 9999;
-            transform: translate(-50%, -50%);
-            animation: blink 1s step-start 0s infinite;
-        }
     </style>
 </head>
 <body class="bg-gray-950 text-cyan-400 leading-relaxed">
-
-    <!-- Custom Cursor -->
-    <div class="custom-cursor"></div>
-    <script>
-        const cursor = document.querySelector('.custom-cursor');
-        document.addEventListener('mousemove', e => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-        });
-        document.addEventListener('mousedown', () => cursor.style.animation = 'none');
-        document.addEventListener('mouseup', () => cursor.style.animation = 'blink 1s step-start 0s infinite');
-    </script>
-
 
     <!-- Header & Navigation -->
     <header class="bg-gray-900 shadow-lg sticky top-0 z-50">
