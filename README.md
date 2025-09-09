@@ -1,4 +1,3 @@
-# elibell004.github.io
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,8 +17,7 @@
     </style>
 </head>
 <body class="bg-gray-900 text-gray-200">
-
-    <!-- Header & Navigation -->
+<!-- Header & Navigation -->
     <header class="bg-gray-800 shadow-md sticky top-0 z-50">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
             <h1 class="text-3xl font-bold text-emerald-400">Elias</h1>
@@ -117,5 +115,4 @@
 
 </body>
 </html>
-
 
