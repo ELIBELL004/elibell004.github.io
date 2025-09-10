@@ -16,25 +16,53 @@
         }
 
         ::selection {
-            background-color: #06b6d4;
+            background-color: #7c3aed; /* Purple-500 */
+            color: #111827; /* Dark Gray */
+        }
+
+        .text-violet-400 {
+            --tw-text-opacity: 1;
+            color: rgba(167, 139, 250, var(--tw-text-opacity));
+            text-shadow: 0 0 5px rgba(167, 139, 250, 0.6);
+        }
+        
+        .hotlink {
+            color: #ec4899; /* Pink-500 */
+            text-shadow: 0 0 5px rgba(236, 72, 153, 0.6);
+            transition: color 0.3s ease;
+        }
+
+        .hotlink:hover {
+            color: #f472b6; /* Pink-400 on hover */
+        }
+
+        .hotlink-button {
+            border-color: #ec4899;
+            color: #ec4899;
+            text-shadow: 0 0 5px rgba(236, 72, 153, 0.6);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .hotlink-button:hover {
+            background-color: #ec4899;
             color: #111827;
         }
     </style>
 </head>
-<body class="bg-gray-950 text-cyan-400 leading-relaxed">
+<body class="bg-gray-950 text-violet-400 leading-relaxed">
 
     <!-- Header & Navigation -->
     <header class="bg-gray-900 shadow-lg sticky top-0 z-50">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
             <div>
-                <a href="#" class="text-3xl font-bold">elias@portfolio:<span class="text-cyan-400 animate-pulse">_</span></a>
+                <a href="#" class="text-3xl font-bold">elias@portfolio:<span class="text-violet-400 animate-pulse">_</span></a>
                 <p class="text-white text-xs tracking-wide italic mt-1">be quick be quiet be on time</p>
             </div>
             <div class="flex space-x-6 text-lg">
-                <a href="#about" class="hover:text-white transition duration-300">&gt; about</a>
-                <a href="#skills" class="hover:text-white transition duration-300">&gt; skills</a>
-                <a href="#projects" class="hover:text-white transition duration-300">&gt; projects</a>
-                <a href="#certifications" class="hover:text-white transition duration-300">&gt; certs</a>
+                <a href="#about" class="hotlink hover:text-white transition duration-300 underline">&gt; about</a>
+                <a href="#skills" class="hotlink hover:text-white transition duration-300 underline">&gt; skills</a>
+                <a href="#projects" class="hotlink hover:text-white transition duration-300 underline">&gt; projects</a>
+                <a href="#certifications" class="hotlink hover:text-white transition duration-300 underline">&gt; certs</a>
             </div>
         </nav>
     </header>
@@ -42,12 +70,14 @@
     <main class="container mx-auto px-6 py-12">
         <!-- Profile Image -->
         <div class="flex justify-center mb-10">
-            <img class="w-48 h-48 md:w-56 md:h-56 rounded-full border-4 border-cyan-400 shadow-lg" src="https://media.discordapp.net/attachments/895489678483025991/1415117306672976003/image.png?ex=68c20a31&is=68c0b8b1&hm=2f4488a829aa234df5fa30436c45e9c0143adbde10652ceae684765c723b84bf&=&format=webp&quality=lossless" alt="Elias Safi profile picture">
+            <img class="w-48 h-48 md:w-56 md:h-56 rounded-full border-4 border-violet-400 shadow-lg" src="https://media.discordapp.net/attachments/895489678483025991/1415117306672976003/image.png?ex=68c20a31&is=68c0b8b1&hm=2f4488a829aa234df5fa30436c45e9c0143adbde10652ceae684765c723b84bf&=&format=webp&quality=lossless" alt="Elias Safi profile picture">
         </div>
         <!-- About Section -->
         <section id="about" class="py-20">
             <div class="max-w-4xl mx-auto">
-                <h2 class="text-4xl font-bold mb-6">Hello World!</h2>
+                <h2 class="text-4xl font-bold mb-6">
+                    <span class="text-red-500">m</span><span class="text-orange-500">e</span><span class="text-yellow-400">o</span><span class="text-green-500">w</span><span class="text-blue-500">l</span><span class="text-indigo-500">o</span><span class="text-purple-500">!</span>
+                </h2>
                 <p class="mb-4">
                     <span class="text-gray-500">elias@portfolio</span>:<span class="text-white">~</span>$ whoami<br>
                     Hi im Elias an IT major specializing in cybersecurity. My passion is protecting and attacking digital landscapes and building systems 
@@ -65,7 +95,7 @@
                 <h3 class="text-4xl font-bold mb-6">My Skills</h3>
                 <div class="grid md:grid-cols-2 gap-8">
                     <!-- Skill Card 1: Cybersecurity -->
-                    <div class="border border-cyan-400 p-6 rounded-lg bg-gray-900">
+                    <div class="border border-violet-400 p-6 rounded-lg bg-gray-900">
                         <span class="text-gray-500">elias@portfolio</span>:<span class="text-white">~/skills</span>$ list --cybersecurity<br>
                         <ul class="list-disc list-inside mt-2">
                             <li>Wireshark, Metasploit, Nessus, Snort, Splunk, Burp</li>
@@ -74,7 +104,7 @@
                         </ul>
                     </div>
                     <!-- Skill Card 2: IT and Programming -->
-                    <div class="border border-cyan-400 p-6 rounded-lg bg-gray-900">
+                    <div class="border border-violet-400 p-6 rounded-lg bg-gray-900">
                         <span class="text-gray-500">elias@portfolio</span>:<span class="text-white">~/skills</span>$ list --programming<br>
                         <ul class="list-disc list-inside mt-2">
                             <li>Python (Preferred)</li>
@@ -95,19 +125,19 @@
                 <div class="space-y-8">
                     <p class="mb-4">
                         <span class="text-gray-500">elias@portfolio</span>:<span class="text-white">~/projects</span>$ cat passwordchecker.txt<br>
-                        <a href="https://github.com/ELIBELL004/passwordchecker" target="_blank" class="hover:underline">**Password Quality Checker:**</a> A Python tool that evaluates password strength based on various security parameters.
+                        <a href="https://github.com/ELIBELL004/passwordchecker" target="_blank" class="hotlink underline">**Password Quality Checker:**</a> A Python tool that evaluates password strength based on various security parameters.
                     </p>
                     <p class="mb-4">
                         <span class="text-gray-500">elias@portfolio</span>:<span class="text-white">~/projects</span>$ cat vulnerabilityscanner.txt<br>
-                        <a href="https://github.com/ELIBELL004/PROJECT" target="_blank" class="hover:underline">**Vulnerability Scanner:**</a> A Python tool to identify and report vulnerabilities in network and web applications.
+                        <a href="https://github.com/ELIBELL004/PROJECT" target="_blank" class="hotlink underline">**Vulnerability Scanner:**</a> A Python tool to identify and report vulnerabilities in network and web applications.
                     </p>
                     <p class="mb-4">
                         <span class="text-gray-500">elias@portfolio</span>:<span class="text-white">~/projects</span>$ cat anomaly.detector.txt<br>
-                        <a href="https://github.com/ELIBELL004/NAD" target="_blank" class="hover:underline">**Network Anomaly Detector:**</a> A Python tool designed to capture network packets from your chosen interface.
+                        <a href="https://github.com/ELIBELL004/NAD" target="_blank" class="hotlink underline">**Network Anomaly Detector:**</a> A Python tool designed to capture network packets from your chosen interface.
                     </p>
                 </div>
                 <a href="https://github.com/ELIBELL004" target="_blank" rel="noopener noreferrer"
-                   class="inline-block border border-cyan-400 text-cyan-400 font-semibold py-3 px-6 rounded-full hover:bg-cyan-400 hover:text-gray-900 transition duration-300 mt-8">
+                   class="inline-block border rounded-full font-semibold py-3 px-6 transition duration-300 mt-8 hotlink-button">
                     &gt; View All Projects on GitHub
                 </a>
             </div>
@@ -117,7 +147,7 @@
         <section id="certifications" class="py-20">
             <div class="max-w-4xl mx-auto">
                 <h3 class="text-4xl font-bold mb-6">Certifications</h3>
-                <div class="border border-cyan-400 p-6 rounded-lg bg-gray-900">
+                <div class="border border-violet-400 p-6 rounded-lg bg-gray-900">
                     <span class="text-gray-500">elias@portfolio</span>:<span class="text-white">~/certifications</span>$ ls<br>
                     <ul class="list-disc list-inside mt-2">
                         <li>NVIDIA AI for All: From Basics to GenAI Practice</li>
