@@ -107,7 +107,6 @@
                 <!-- Chatbot Box -->
                 <div class="border border-violet-400 p-6 rounded-lg bg-gray-900 shadow-lg">
                     <div id="chatbot-display" class="h-48 overflow-y-auto mb-4 p-2 bg-gray-800 rounded-md">
-                        <p><span class="text-fuchsia-500">Bot:</span> meowlo im still in training but I can handle the basics, ask me about skills, projects or certifications, or just say hi!</p>
                     </div>
                     <div class="flex items-center">
                         <span class="text-gray-500">you@visitor</span>:$
@@ -196,40 +195,19 @@
     <script>
         const chatbotInput = document.getElementById('chatbot-input');
         const chatbotDisplay = document.getElementById('chatbot-display');
-        let isTyping = false;
-        let hasIntroduced = false;
 
-        function typeMessage(sender, message, color) {
-            isTyping = true;
+        function appendMessage(sender, message, color) {
             const p = document.createElement('p');
-            p.innerHTML = `<span class="text-${color}-500">${sender}:</span> <span class="typing-text"></span>`;
+            p.innerHTML = `<span class="text-${color}-500">${sender}:</span> ${message}`;
             chatbotDisplay.appendChild(p);
-            const textElement = p.querySelector('.typing-text');
-            let i = 0;
-            const speed = 15; // Speed in milliseconds
-
-            function typeWriter() {
-                if (i < message.length) {
-                    textElement.textContent += message.charAt(i);
-                    i++;
-                    setTimeout(typeWriter, speed);
-                } else {
-                    isTyping = false;
-                    chatbotDisplay.scrollTop = chatbotDisplay.scrollHeight;
-                }
-            }
-            typeWriter();
+            chatbotDisplay.scrollTop = chatbotDisplay.scrollHeight;
         }
 
         chatbotInput.addEventListener('keydown', function(event) {
-            if (event.key === 'Enter' && !isTyping) {
+            if (event.key === 'Enter') {
                 const query = chatbotInput.value.trim().toLowerCase();
-                // Append user's message immediately without typing effect
-                const userP = document.createElement('p');
-                userP.innerHTML = `<span class="text-white-500">You:</span> ${query}`;
-                chatbotDisplay.appendChild(userP);
+                appendMessage('You', query, 'white');
                 chatbotInput.value = '';
-                chatbotDisplay.scrollTop = chatbotDisplay.scrollHeight;
 
                 let response = "I need a bigger budget for a bigger LLM.. :(";
 
@@ -246,19 +224,16 @@
                 }
 
                 setTimeout(() => {
-                    typeMessage('Bot', response, 'fuchsia');
+                    appendMessage('Bot', response, 'fuchsia');
                 }, 500);
             }
         });
 
         window.addEventListener('load', () => {
-             if (!hasIntroduced) {
-                 typeMessage('Bot', "meowlo im still in training but I can handle the basics, ask me about skills, projects or certifications, or just say hi!", 'fuchsia');
-                 hasIntroduced = true;
-             }
+             appendMessage('Bot', "meowlo im still in training but I can handle the basics, ask me about skills, projects or certifications, or just say hi!", 'fuchsia');
             setTimeout(() => {
                 chatbotInput.focus();
-            }, 3000); // Wait for the initial message to type out
+            }, 500);
         });
     </script>
 </body>
