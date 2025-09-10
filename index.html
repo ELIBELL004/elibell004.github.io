@@ -197,6 +197,7 @@
         const chatbotInput = document.getElementById('chatbot-input');
         const chatbotDisplay = document.getElementById('chatbot-display');
         let isTyping = false;
+        let hasIntroduced = false;
 
         function typeMessage(sender, message, color) {
             isTyping = true;
@@ -251,7 +252,10 @@
         });
 
         window.addEventListener('load', () => {
-            typeMessage('Bot', "meowlo im still in training but I can handle the basics, ask me about skills, projects or certifications, or just say hi!", 'fuchsia');
+             if (!hasIntroduced) {
+                 typeMessage('Bot', "meowlo im still in training but I can handle the basics, ask me about skills, projects or certifications, or just say hi!", 'fuchsia');
+                 hasIntroduced = true;
+             }
             setTimeout(() => {
                 chatbotInput.focus();
             }, 3000); // Wait for the initial message to type out
