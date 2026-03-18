@@ -1,240 +1,274 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elias's Portfolio</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts for a monospaced, terminal-like font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Roboto Mono', monospace;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Elias Safi | Cybersecurity & IT Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
 
-        ::selection {
-            background-color: #7c3aed; /* Purple-500 */
-            color: #111827; /* Dark Gray */
-        }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #000000;
+    }
 
-        .text-violet-400 {
-            --tw-text-opacity: 1;
-            color: rgba(167, 139, 250, var(--tw-text-opacity));
-            text-shadow: 0 0 5px rgba(167, 139, 250, 0.6);
-        }
-        
-        .hotlink {
-            color: #ec4899; /* Pink-500 */
-            text-shadow: 0 0 5px rgba(236, 72, 153, 0.6);
-            transition: color 0.3s ease;
-        }
+    .glass {
+      background: rgba(17, 24, 39, 0.72);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
 
-        .hotlink:hover {
-            color: #f472b6; /* Pink-400 on hover */
-        }
+    .section-title {
+      letter-spacing: -0.03em;
+    }
 
-        .hotlink-button {
-            border-color: #ec4899;
-            color: #ec4899;
-            text-shadow: 0 0 5px rgba(236, 72, 153, 0.6);
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
+    .card-hover {
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    }
 
-        .hotlink-button:hover {
-            background-color: #ec4899;
-            color: #111827;
-        }
-    </style>
+    .card-hover:hover {
+      transform: translateY(-4px);
+      border-color: rgba(96, 165, 250, 0.45);
+      box-shadow: 0 18px 50px rgba(2, 6, 23, 0.45);
+    }
+  </style>
 </head>
-<body class="bg-gray-950 text-violet-400 leading-relaxed">
+<body class="text-slate-100 antialiased">
+  <header class="sticky top-0 z-50 border-b border-white/10 bg-slate-950/75 backdrop-blur-xl">
+    <nav class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
+      <a href="#home" class="text-lg font-semibold tracking-tight text-white">Elias Safi</a>
+      <div class="hidden items-center gap-8 text-sm text-slate-300 md:flex">
+        <a href="#about" class="transition hover:text-white">About</a>
+        <a href="#skills" class="transition hover:text-white">Skills</a>
+        <a href="#projects" class="transition hover:text-white">Projects</a>
+        <a href="#certifications" class="transition hover:text-white">Certifications</a>
+        <a href="#contact" class="transition hover:text-white">Contact</a>
+      </div>
+      <a
+        href="https://github.com/ELIBELL004"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="rounded-full border border-sky-400/40 bg-sky-400/10 px-4 py-2 text-sm font-medium text-sky-300 transition hover:border-sky-300 hover:bg-sky-400/20 hover:text-white"
+      >
+        GitHub
+      </a>
+    </nav>
+  </header>
 
-    <!-- Header & Navigation -->
-    <header class="bg-gray-900 shadow-lg sticky top-0 z-50">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <div>
-                <a href="#" class="text-3xl font-bold">elias@portfolio:<span class="text-violet-400 animate-pulse">_</span></a>
-                <p class="text-white text-xs tracking-wide italic mt-1">be quick be quiet be on time</p>
-            </div>
-            <div class="flex space-x-6 text-lg">
-                <a href="#about" class="hotlink hover:text-white transition duration-300 underline">&gt; about</a>
-                <a href="#skills" class="hotlink hover:text-white transition duration-300 underline">&gt; skills</a>
-                <a href="#projects" class="hotlink hover:text-white transition duration-300 underline">&gt; projects</a>
-                <a href="#certifications" class="hotlink hover:text-white transition duration-300 underline">&gt; certs</a>
-                <a href="https://github.com/ELIBELL004" target="_blank" class="hotlink hover:text-white transition duration-300 underline">&gt; github</a>
-            </div>
-        </nav>
-    </header>
+  <main id="home">
+    <section class="mx-auto max-w-7xl px-6 pb-20 pt-20 lg:px-8 lg:pt-28">
+      <div class="grid items-center gap-12 lg:grid-cols-[1.2fr_0.8fr]">
+        <div>
+          <p class="mb-4 text-sm font-medium uppercase tracking-[0.2em] text-sky-300">Cybersecurity • IT • Systems</p>
+          <h1 class="max-w-4xl text-5xl font-extrabold tracking-tight text-white sm:text-6xl lg:text-7xl">
+            Building secure, reliable, and professional digital systems.
+          </h1>
+          <p class="mt-6 max-w-2xl text-lg leading-8 text-slate-300">
+            I’m Elias Safi, an IT student focused on cybersecurity, system defense, and practical technical problem solving. I build projects that strengthen security awareness, improve system visibility, and demonstrate real-world technical skills.
+          </p>
 
-    <main class="container mx-auto px-6 py-12">
-        <!-- Top Section Grid -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-10">
-            <!-- Left Column: Profile Image -->
-            <div class="lg:col-span-2">
-                <div class="flex justify-center mb-10 lg:justify-start">
-                    <img class="w-48 h-48 md:w-56 md:h-56 rounded-full border-4 border-violet-400 shadow-lg" src="https://https://media.discordapp.net/attachments/895489678483025991/1415117306672976003/image.png?ex=68c35bb1&is=68c20a31&hm=f28c3421980ba1c3250cae2bfdd156346710964e7d001d7e8f5f0df29cdddc3a&=&format=webp&quality=lossless&width=742&height=732" alt="Elias Safi profile picture">
-                </div>
-                <h2 class="text-4xl font-bold mb-6">
-                    <span class="text-red-500">m</span><span class="text-orange-500">e</span><span class="text-yellow-400">o</span><span class="text-green-500">w</span><span class="text-blue-500">l</span><span class="text-indigo-500">o</span><span class="text-purple-500">!</span>
-                </h2>
-                <!-- About Section -->
-                <section id="about" class="py-20">
-                    <div class="max-w-4xl mx-auto lg:mx-0">
-                        <p class="mb-4">
-                            <span class="text-gray-500">elias@portfolio</span>:<span class="text-white">~</span>$ whoami<br>
-                            Hi im Elias an IT major specializing in cybersecurity. My passion is protecting and attacking digital landscapes and building systems
-                        </p>
-                        <p>
-                            <span class="text-gray-500">elias@portfolio</span>:<span class="text-white">~</span>$ cat mission.txt<br>
-                            My work lies in everything, The patient confidentiality, Your bank account being protected, I aim to apply my skills in penetration testing and system defense.
-                        </p>
-                    </div>
-                </section>
-            </div>
-            <!-- Right Column: To-Do List & Chatbot -->
-            <div class="lg:col-span-1">
-                <div class="border border-violet-400 p-6 rounded-lg bg-gray-900 shadow-lg mb-8">
-                    <span class="text-gray-500">elias@portfolio</span>:<span class="text-white">~/goals</span>$ ls<br>
-                    <ul class="list-disc list-inside mt-2">
-                        <li>CompTIA+ Certification</li>
-                        <li>CompTIA Sec+ Certification</li>
-                        <li>Splunk Certification</li>
-                        <li>TSCI Clearance</li>
-                    </ul>
-                </div>
-                <!-- Chatbot Box -->
-                <div class="border border-violet-400 p-6 rounded-lg bg-gray-900 shadow-lg">
-                    <div id="chatbot-display" class="h-48 overflow-y-auto mb-4 p-2 bg-gray-800 rounded-md">
-                    </div>
-                    <div class="flex items-center">
-                        <span class="text-gray-500">you@visitor</span>:$
-                        <input id="chatbot-input" type="text" class="bg-transparent border-none outline-none w-full ml-2 caret-pink-500 text-white">
-                    </div>
-                </div>
-            </div>
+          <div class="mt-10 flex flex-wrap gap-4">
+            <a
+              href="#projects"
+              class="rounded-full bg-sky-400 px-6 py-3 text-sm font-semibold text-slate-950 transition hover:bg-sky-300"
+            >
+              View Projects
+            </a>
+            <a
+              href="#contact"
+              class="rounded-full border border-white/15 px-6 py-3 text-sm font-semibold text-white transition hover:border-white/30 hover:bg-white/5"
+            >
+              Contact
+            </a>
+          </div>
         </div>
 
-        <!-- Skills Section -->
-        <section id="skills" class="py-20">
-            <div class="max-w-4xl mx-auto">
-                <h3 class="text-4xl font-bold mb-6">My Skills</h3>
-                <div class="grid md:grid-cols-2 gap-8">
-                    <!-- Skill Card 1: Cybersecurity -->
-                    <div class="border border-violet-400 p-6 rounded-lg bg-gray-900">
-                        <span class="text-gray-500">elias@portfolio</span>:<span class="text-white">~/skills</span>$ list --cybersecurity<br>
-                        <ul class="list-disc list-inside mt-2">
-                            <li>Wireshark, Metasploit, Nessus, Snort, Splunk, Burp</li>
-                            <li>Network Administration: TCP/IP, DNS, DHCP</li>
-                            <li>Cloud Services: AWS, Azure, Google Cloud</li>
-                        </ul>
-                    </div>
-                    <!-- Skill Card 2: IT and Programming -->
-                    <div class="border border-violet-400 p-6 rounded-lg bg-gray-900">
-                        <span class="text-gray-500">elias@portfolio</span>:<span class="text-white">~/skills</span>$ list --programming<br>
-                        <ul class="list-disc list-inside mt-2">
-                            <li>Python (Preferred)</li>
-                            <li>C++</li>
-                            <li>Java</li>
-                            <li>SQL</li>
-                            <li>Proficient in command line interfaces</li>
-                        </ul>
-                    </div>
-                </div>
+        <div class="glass rounded-3xl p-8 shadow-2xl shadow-slate-950/50">
+          <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
+            <div class="rounded-2xl border border-white/10 bg-white/5 p-5">
+              <p class="text-sm text-slate-400">Focus Area</p>
+              <p class="mt-2 text-xl font-semibold text-white">Cybersecurity</p>
+              <p class="mt-2 text-sm text-slate-300">System defense, monitoring, security tooling, and technical analysis.</p>
             </div>
-        </section>
-
-        <!-- Projects Section -->
-        <section id="projects" class="py-20">
-            <div class="max-w-4xl mx-auto">
-                <h3 class="text-4xl font-bold mb-6">My Projects</h3>
-                <div class="space-y-8">
-                    <p class="mb-4">
-                        <span class="text-gray-500">elias@portfolio</span>:<span class="text-white">~/projects</span>$ cat passwordchecker.txt<br>
-                        <a href="https://github.com/ELIBELL004/passwordchecker" target="_blank" class="hotlink underline">**Password Quality Checker:**</a> A Python tool that evaluates password strength based on various security parameters.
-                    </p>
-                    <p class="mb-4">
-                        <span class="text-gray-500">elias@portfolio</span>:<span class="text-white">~/projects</span>$ cat vulnerabilityscanner.txt<br>
-                        <a href="https://github.com/ELIBELL004/PROJECT" target="_blank" class="hotlink underline">**Vulnerability Scanner:**</a> A Python tool to identify and report vulnerabilities in network and web applications.
-                    </p>
-                    <p class="mb-4">
-                        <span class="text-gray-500">elias@portfolio</span>:<span class="text-white">~/projects</span>$ cat anomaly.detector.txt<br>
-                        <a href="https://github.com/ELIBELL004/NAD" target="_blank" class="hotlink underline">**Network Anomaly Detector:**</a> A Python tool designed to capture network packets from your chosen interface.
-                    </p>
-                </div>
-                <a href="https://github.com/ELIBELL004" target="_blank" rel="noopener noreferrer"
-                   class="inline-block border rounded-full font-semibold py-3 px-6 transition duration-300 mt-8 hotlink-button">
-                    &gt; View All Projects on GitHub
-                </a>
+            <div class="rounded-2xl border border-white/10 bg-white/5 p-5">
+              <p class="text-sm text-slate-400">Primary Stack</p>
+              <p class="mt-2 text-xl font-semibold text-white">Python • SQL • CLI</p>
+              <p class="mt-2 text-sm text-slate-300">Practical scripting, database work, and command-line fluency.</p>
             </div>
-        </section>
-        
-        <!-- Certifications Section -->
-        <section id="certifications" class="py-20">
-            <div class="max-w-4xl mx-auto">
-                <h3 class="text-4xl font-bold mb-6">Certifications</h3>
-                <div class="border border-violet-400 p-6 rounded-lg bg-gray-900">
-                    <span class="text-gray-500">elias@portfolio</span>:<span class="text-white">~/certifications</span>$ ls<br>
-                    <ul class="list-disc list-inside mt-2">
-                        <li>NVIDIA AI for All: From Basics to GenAI Practice</li>
-                        <li>NVIDIA Bright Cluster Manager Basic Administration</li>
-                        <li>Career Essentials in Cybersecurity by Microsoft and LinkedIn</li>
-                        <li>Google Cybersecurity Professional Certificate</li>
-                    </ul>
-                </div>
+            <div class="rounded-2xl border border-white/10 bg-white/5 p-5 xl:col-span-2">
+              <p class="text-sm text-slate-400">Current Direction</p>
+              <p class="mt-2 text-xl font-semibold text-white">Security projects with professional presentation</p>
+              <p class="mt-2 text-sm text-slate-300">Focused on building a portfolio that is clean, credible, and recruiter-friendly.</p>
             </div>
-        </section>
-    </main>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <!-- Footer -->
-    <footer class="bg-gray-950 text-gray-600 text-center py-6 mt-12 text-sm">
-        <p>&gt; Press any key to continue...</p>
-    </footer>
+    <section id="about" class="mx-auto max-w-7xl px-6 py-16 lg:px-8">
+      <div class="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
+        <div>
+          <p class="text-sm font-semibold uppercase tracking-[0.18em] text-sky-300">About</p>
+          <h2 class="section-title mt-3 text-3xl font-bold text-white sm:text-4xl">A more professional overview</h2>
+        </div>
+        <div class="glass rounded-3xl p-8 text-slate-300 shadow-xl shadow-slate-950/30">
+          <p class="leading-8">
+            I am an IT major with a strong interest in cybersecurity, technical support, and infrastructure. My work centers on understanding how systems function, identifying weaknesses, and building practical tools that improve visibility and security.
+          </p>
+          <p class="mt-5 leading-8">
+            I am especially interested in penetration testing, monitoring, network analysis, and secure system design. This portfolio highlights projects, certifications, and technical skills that reflect both my current abilities and the direction of my long-term career development.
+          </p>
+        </div>
+      </div>
+    </section>
 
-    <script>
-        const chatbotInput = document.getElementById('chatbot-input');
-        const chatbotDisplay = document.getElementById('chatbot-display');
+    <section id="skills" class="mx-auto max-w-7xl px-6 py-16 lg:px-8">
+      <div class="mb-10">
+        <p class="text-sm font-semibold uppercase tracking-[0.18em] text-sky-300">Skills</p>
+        <h2 class="section-title mt-3 text-3xl font-bold text-white sm:text-4xl">Technical capabilities</h2>
+      </div>
 
-        function appendMessage(sender, message, color) {
-            const p = document.createElement('p');
-            p.innerHTML = `<span class="text-${color}-500">${sender}:</span> ${message}`;
-            chatbotDisplay.appendChild(p);
-            chatbotDisplay.scrollTop = chatbotDisplay.scrollHeight;
-        }
+      <div class="grid gap-6 lg:grid-cols-3">
+        <article class="glass card-hover rounded-3xl p-7">
+          <h3 class="text-xl font-semibold text-white">Security Tools</h3>
+          <ul class="mt-4 space-y-3 text-slate-300">
+            <li>Wireshark</li>
+            <li>Metasploit</li>
+            <li>Nessus</li>
+            <li>Snort</li>
+            <li>Splunk</li>
+            <li>Burp Suite</li>
+          </ul>
+        </article>
 
-        chatbotInput.addEventListener('keydown', function(event) {
-            if (event.key === 'Enter') {
-                const query = chatbotInput.value.trim().toLowerCase();
-                appendMessage('You', query, 'white');
-                chatbotInput.value = '';
+        <article class="glass card-hover rounded-3xl p-7">
+          <h3 class="text-xl font-semibold text-white">Networking & Systems</h3>
+          <ul class="mt-4 space-y-3 text-slate-300">
+            <li>TCP/IP</li>
+            <li>DNS</li>
+            <li>DHCP</li>
+            <li>System troubleshooting</li>
+            <li>Command-line workflows</li>
+            <li>Basic cloud familiarity</li>
+          </ul>
+        </article>
 
-                let response = "I need a bigger budget for a bigger LLM.. :(";
+        <article class="glass card-hover rounded-3xl p-7">
+          <h3 class="text-xl font-semibold text-white">Programming & Data</h3>
+          <ul class="mt-4 space-y-3 text-slate-300">
+            <li>Python</li>
+            <li>SQL</li>
+            <li>Java</li>
+            <li>C++</li>
+            <li>HTML</li>
+            <li>Technical documentation</li>
+          </ul>
+        </article>
+      </div>
+    </section>
 
-                if (query.includes('hello') || query.includes('hi')) {
-                    response = "meowlo";
-                } else if (query.includes('skills')) {
-                    response = "Elias has skills in Wireshark, Metasploit, Python, C++, Java, and more.";
-                } else if (query.includes('projects')) {
-                    response = "Elias has worked on a Password Quality Checker, a Vulnerability Scanner, and a Network Anomaly Detector. Check the projects section for links!";
-                } else if (query.includes('certifications') || query.includes('certs')) {
-                    response = "Elias holds certifications from NVIDIA, Microsoft, LinkedIn, and Google.";
-                } else if (query.includes('contact')) {
-                    response = "For serious inquiries, please contact Elias via his GitHub profile!";
-                }
+    <section id="projects" class="mx-auto max-w-7xl px-6 py-16 lg:px-8">
+      <div class="mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <p class="text-sm font-semibold uppercase tracking-[0.18em] text-sky-300">Projects</p>
+          <h2 class="section-title mt-3 text-3xl font-bold text-white sm:text-4xl">Selected work</h2>
+        </div>
+        <a
+          href="https://github.com/ELIBELL004"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-sm font-medium text-sky-300 transition hover:text-white"
+        >
+          View full GitHub →
+        </a>
+      </div>
 
-                setTimeout(() => {
-                    appendMessage('Bot', response, 'fuchsia');
-                }, 500);
-            }
-        });
+      <div class="grid gap-6 lg:grid-cols-3">
+        <article class="glass card-hover rounded-3xl p-7">
+          <p class="text-sm font-medium text-sky-300">Python • Security</p>
+          <h3 class="mt-3 text-2xl font-semibold text-white">Password Quality Checker</h3>
+          <p class="mt-4 leading-7 text-slate-300">
+            A Python-based tool that evaluates password strength using practical security criteria and helps reinforce better credential hygiene.
+          </p>
+          <a href="https://github.com/ELIBELL004/passwordchecker" target="_blank" rel="noopener noreferrer" class="mt-6 inline-block text-sm font-semibold text-white transition hover:text-sky-300">
+            View project →
+          </a>
+        </article>
 
-        window.addEventListener('load', () => {
-             appendMessage('Bot', "meowlo im still in training but I can handle the basics, ask me about skills, projects or certifications, or just say hi!", 'fuchsia');
-            setTimeout(() => {
-                chatbotInput.focus();
-            }, 500);
-        });
-    </script>
+        <article class="glass card-hover rounded-3xl p-7">
+          <p class="text-sm font-medium text-sky-300">Python • Scanning</p>
+          <h3 class="mt-3 text-2xl font-semibold text-white">Vulnerability Scanner</h3>
+          <p class="mt-4 leading-7 text-slate-300">
+            A project focused on identifying and reporting weaknesses in networks and web applications through automated checks and structured output.
+          </p>
+          <a href="https://github.com/ELIBELL004/PROJECT" target="_blank" rel="noopener noreferrer" class="mt-6 inline-block text-sm font-semibold text-white transition hover:text-sky-300">
+            View project →
+          </a>
+        </article>
+
+        <article class="glass card-hover rounded-3xl p-7">
+          <p class="text-sm font-medium text-sky-300">Networking • Monitoring</p>
+          <h3 class="mt-3 text-2xl font-semibold text-white">Network Anomaly Detector</h3>
+          <p class="mt-4 leading-7 text-slate-300">
+            A packet-capture and traffic-analysis project designed to monitor selected interfaces and surface unusual network behavior.
+          </p>
+          <a href="https://github.com/ELIBELL004/NAD" target="_blank" rel="noopener noreferrer" class="mt-6 inline-block text-sm font-semibold text-white transition hover:text-sky-300">
+            View project →
+          </a>
+        </article>
+      </div>
+    </section>
+
+    <section id="certifications" class="mx-auto max-w-7xl px-6 py-16 lg:px-8">
+      <div class="mb-10">
+        <p class="text-sm font-semibold uppercase tracking-[0.18em] text-sky-300">Certifications</p>
+        <h2 class="section-title mt-3 text-3xl font-bold text-white sm:text-4xl">Professional development</h2>
+      </div>
+
+      <div class="glass rounded-3xl p-8 shadow-xl shadow-slate-950/30">
+        <div class="grid gap-5 md:grid-cols-2">
+          <div class="rounded-2xl border border-white/10 bg-white/5 p-5 text-slate-300">NVIDIA AI for All: From Basics to GenAI Practice</div>
+          <div class="rounded-2xl border border-white/10 bg-white/5 p-5 text-slate-300">NVIDIA Bright Cluster Manager Basic Administration</div>
+          <div class="rounded-2xl border border-white/10 bg-white/5 p-5 text-slate-300">Career Essentials in Cybersecurity by Microsoft and LinkedIn</div>
+          <div class="rounded-2xl border border-white/10 bg-white/5 p-5 text-slate-300">Google Cybersecurity Professional Certificate</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="mx-auto max-w-7xl px-6 py-16 lg:px-8">
+      <div class="glass rounded-3xl p-8 shadow-2xl shadow-slate-950/40">
+        <div class="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
+          <div>
+            <p class="text-sm font-semibold uppercase tracking-[0.18em] text-sky-300">Contact</p>
+            <h2 class="section-title mt-3 text-3xl font-bold text-white sm:text-4xl">Open to opportunities and collaboration</h2>
+            <p class="mt-4 max-w-2xl leading-8 text-slate-300">
+              For projects, internships, or professional inquiries, the best place to view my current work is GitHub.
+            </p>
+          </div>
+          <div class="flex flex-wrap gap-4">
+            <a
+              href="https://github.com/ELIBELL004"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="rounded-full bg-sky-400 px-6 py-3 text-sm font-semibold text-slate-950 transition hover:bg-sky-300"
+            >
+              Visit GitHub
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-white/10 px-6 py-8 text-center text-sm text-slate-500">
+    © 2026 Elias Safi. All rights reserved.
+  </footer>
 </body>
 </html>
