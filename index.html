@@ -8,55 +8,52 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --green:   #00ff88;
-      --dim:     #00cc66;
-      --dark:    #0a0e0d;
-      --surface: #0f1512;
-      --card:    #131a17;
-      --border:  #1e2d25;
-      --text:    #c8d8d0;
-      --muted:   #4a6a58;
-      --red:     #ff4466;
-      --orange:  #ffaa33;
+      --bg:      #000;
+      --fg:      #fff;
+      --mid:     #888;
+      --dim:     #333;
+      --card-bg: #0d0d0d;
+      --border:  #1f1f1f;
+      --border-hi: #444;
     }
 
     html { scroll-behavior: smooth; }
 
     body {
-      background: var(--dark);
-      color: var(--text);
-      font-family: 'Courier New', Courier, monospace;
-      line-height: 1.7;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      line-height: 1.6;
       overflow-x: hidden;
     }
 
-    /* ── Matrix canvas ───────────────────────────────────────────── */
-    #matrix-canvas {
+    /* ── Constellation canvas ───────────────────────────────────── */
+    #constellation {
       position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
+      inset: 0;
       z-index: 0;
-      opacity: 0.07;
+      opacity: 0.35;
       pointer-events: none;
     }
 
-    /* ── Layout ──────────────────────────────────────────────────── */
-    section, footer, nav { position: relative; z-index: 1; }
+    /* ── Stacking context ───────────────────────────────────────── */
+    nav, section, footer { position: relative; z-index: 1; }
 
     .container {
-      max-width: 860px;
+      max-width: 820px;
       margin: 0 auto;
-      padding: 0 1.5rem;
+      padding: 0 2rem;
     }
 
     /* ── Nav ─────────────────────────────────────────────────────── */
     nav {
       position: sticky;
       top: 0;
-      background: rgba(10,14,13,0.88);
-      backdrop-filter: blur(8px);
+      background: rgba(0,0,0,0.75);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
-      padding: 0.8rem 0;
+      padding: 1rem 0;
     }
 
     nav .container {
@@ -68,365 +65,464 @@
     }
 
     .nav-brand {
-      color: var(--green);
-      font-size: 1rem;
-      font-weight: bold;
+      color: var(--fg);
+      font-size: 0.85rem;
+      font-weight: 700;
       text-decoration: none;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
     }
 
-    .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
     .nav-links a {
-      color: var(--muted);
+      color: var(--mid);
       text-decoration: none;
-      font-size: 0.82rem;
-      letter-spacing: 0.08em;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
       transition: color 0.2s;
     }
-    .nav-links a:hover { color: var(--green); }
 
-    /* ── Hero ────────────────────────────────────────────────────── */
+    .nav-links a:hover { color: var(--fg); }
+
+    /* ── Hero ─────────────────────────────────────────────────────── */
     #hero {
       min-height: 100vh;
       display: flex;
       align-items: center;
-      padding: 6rem 0 4rem;
+      padding: 8rem 0 5rem;
     }
 
-    .hero-inner { max-width: 680px; }
+    .hero-inner { max-width: 640px; }
 
-    .hero-tag {
-      display: inline-block;
-      color: var(--green);
-      font-size: 0.75rem;
-      letter-spacing: 0.2em;
+    .hero-eyebrow {
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
       text-transform: uppercase;
-      margin-bottom: 1.2rem;
-      opacity: 0.8;
+      color: var(--mid);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.2s ease forwards;
     }
 
     h1 {
-      font-size: clamp(2.2rem, 6vw, 3.6rem);
-      color: #fff;
-      line-height: 1.15;
-      margin-bottom: 0.6rem;
+      font-size: clamp(2.4rem, 7vw, 4.2rem);
+      font-weight: 700;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      color: var(--fg);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.4s ease forwards;
     }
 
-    h1 span { color: var(--green); }
+    h1 em {
+      font-style: normal;
+      color: var(--mid);
+    }
 
     .hero-sub {
-      font-size: clamp(0.95rem, 2vw, 1.1rem);
-      color: var(--muted);
-      margin-bottom: 2rem;
-      max-width: 520px;
+      font-size: 1rem;
+      color: var(--mid);
+      max-width: 480px;
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.6s ease forwards;
     }
 
-    .badge-row { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 2.5rem; }
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.75s ease forwards;
+    }
 
     .badge {
       display: inline-flex;
       align-items: center;
       gap: 0.4rem;
-      padding: 0.3rem 0.75rem;
+      padding: 0.3rem 0.8rem;
       border: 1px solid var(--border);
-      border-radius: 2px;
-      font-size: 0.75rem;
-      letter-spacing: 0.06em;
-      color: var(--muted);
-      background: var(--card);
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      color: var(--mid);
     }
 
-    .badge .dot {
-      width: 6px; height: 6px;
+    .pulse {
+      width: 5px; height: 5px;
       border-radius: 50%;
-      display: inline-block;
+      background: var(--fg);
+      animation: pulse 2s infinite;
     }
-    .dot-green { background: var(--green); }
-    .dot-orange { background: var(--orange); }
 
-    .btn-row { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.3; transform: scale(0.6); }
+    }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.9s ease forwards;
+    }
 
     .btn {
       display: inline-block;
-      padding: 0.6rem 1.4rem;
+      padding: 0.65rem 1.5rem;
       font-family: inherit;
-      font-size: 0.82rem;
-      letter-spacing: 0.1em;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
       text-decoration: none;
-      border-radius: 2px;
-      transition: all 0.2s;
+      border: 1px solid var(--border-hi);
+      color: var(--fg);
+      background: transparent;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
       cursor: pointer;
     }
 
-    .btn-primary {
-      background: var(--green);
-      color: #000;
-      border: 1px solid var(--green);
-      font-weight: bold;
+    .btn:hover {
+      background: var(--fg);
+      color: var(--bg);
+      border-color: var(--fg);
     }
-    .btn-primary:hover { background: var(--dim); border-color: var(--dim); }
 
-    .btn-ghost {
+    .btn-fill {
+      background: var(--fg);
+      color: var(--bg);
+      border-color: var(--fg);
+    }
+
+    .btn-fill:hover {
       background: transparent;
-      color: var(--green);
-      border: 1px solid var(--border);
-    }
-    .btn-ghost:hover { border-color: var(--green); }
-
-    /* ── Section shared ──────────────────────────────────────────── */
-    section { padding: 5rem 0; }
-
-    .section-label {
-      font-size: 0.7rem;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--green);
-      margin-bottom: 0.5rem;
+      color: var(--fg);
     }
 
-    .section-title {
-      font-size: clamp(1.4rem, 3.5vw, 1.9rem);
-      color: #fff;
-      margin-bottom: 2.5rem;
-    }
-
+    /* ── Divider ─────────────────────────────────────────────────── */
     .divider {
       height: 1px;
       background: var(--border);
-      margin-bottom: 5rem;
     }
 
-    /* ── Findings ─────────────────────────────────────────────────── */
-    .findings { display: flex; flex-direction: column; gap: 1.2rem; }
+    /* ── Section ─────────────────────────────────────────────────── */
+    section { padding: 6rem 0; }
 
-    .finding-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-left: 3px solid var(--border);
-      border-radius: 2px;
-      padding: 1.4rem 1.6rem;
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
-
-    .finding-card:hover {
-      border-left-color: var(--green);
-      box-shadow: 0 0 20px rgba(0,255,136,0.05);
-    }
-
-    .finding-card.high  { border-left-color: var(--orange); }
-    .finding-card.crit  { border-left-color: var(--red); }
-
-    .finding-top {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .finding-title {
-      font-size: 1rem;
-      color: #fff;
-      font-weight: bold;
-    }
-
-    .finding-meta { display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; }
-
-    .chip {
-      font-size: 0.68rem;
-      padding: 0.2rem 0.55rem;
-      border-radius: 2px;
-      letter-spacing: 0.07em;
-      font-weight: bold;
+    .section-eyebrow {
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
       text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 0.6rem;
     }
 
-    .chip-platform {
-      background: rgba(0,255,136,0.08);
-      color: var(--green);
-      border: 1px solid rgba(0,255,136,0.2);
-    }
-
-    .chip-status-triage {
-      background: rgba(255,170,51,0.08);
-      color: var(--orange);
-      border: 1px solid rgba(255,170,51,0.2);
-    }
-
-    .chip-status-submitted {
-      background: rgba(0,255,136,0.06);
-      color: var(--dim);
-      border: 1px solid rgba(0,200,100,0.15);
-    }
-
-    .chip-status-placeholder {
-      background: rgba(74,106,88,0.15);
-      color: var(--muted);
-      border: 1px solid var(--border);
-    }
-
-    .cvss {
-      font-size: 0.72rem;
-      color: var(--muted);
-      letter-spacing: 0.05em;
-    }
-
-    .cvss strong { color: var(--orange); }
-    .cvss.crit strong { color: var(--red); }
-
-    .finding-desc {
-      font-size: 0.85rem;
-      color: var(--muted);
-      line-height: 1.6;
-    }
-
-    .finding-tech {
-      margin-top: 0.75rem;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-    }
-
-    .tech-tag {
-      font-size: 0.68rem;
-      padding: 0.15rem 0.5rem;
-      border: 1px solid var(--border);
-      border-radius: 2px;
-      color: var(--muted);
-      letter-spacing: 0.05em;
-    }
-
-    /* ── About ───────────────────────────────────────────────────── */
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-    }
-
-    @media (max-width: 600px) {
-      .about-grid { grid-template-columns: 1fr; }
-    }
-
-    .about-block h3 {
-      font-size: 0.75rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--green);
-      margin-bottom: 0.8rem;
-    }
-
-    .skill-list { list-style: none; }
-    .skill-list li {
-      font-size: 0.85rem;
-      color: var(--muted);
-      padding: 0.3rem 0;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    .skill-list li::before {
-      content: '›';
-      color: var(--green);
-    }
-
-    /* ── Stats row ───────────────────────────────────────────────── */
-    .stats-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.5rem;
+    .section-title {
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--fg);
       margin-bottom: 3rem;
     }
 
-    .stat-box {
-      flex: 1 1 140px;
-      background: var(--card);
+    /* ── Stats ───────────────────────────────────────────────────── */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--border);
       border: 1px solid var(--border);
-      border-radius: 2px;
-      padding: 1.2rem 1.4rem;
+      margin-bottom: 3.5rem;
+    }
+
+    @media (max-width: 580px) {
+      .stats-row { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .stat-box {
+      background: var(--bg);
+      padding: 1.5rem 1.2rem;
       text-align: center;
     }
 
     .stat-num {
-      font-size: 2rem;
-      color: var(--green);
-      font-weight: bold;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--fg);
       line-height: 1;
-      margin-bottom: 0.3rem;
+      margin-bottom: 0.4rem;
+      font-variant-numeric: tabular-nums;
     }
 
     .stat-label {
-      font-size: 0.7rem;
+      font-size: 0.65rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--muted);
+      color: var(--mid);
+    }
+
+    /* ── Finding cards ───────────────────────────────────────────── */
+    .findings { display: flex; flex-direction: column; gap: 1px; }
+
+    .finding-card {
+      background: var(--card-bg);
+      border-top: 1px solid var(--border);
+      padding: 1.6rem 1.8rem;
+      cursor: default;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.25s;
+    }
+
+    .finding-card:last-child { border-bottom: 1px solid var(--border); }
+
+    .finding-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--fg);
+      opacity: 0;
+      transition: opacity 0.25s;
+      z-index: 0;
+    }
+
+    .finding-card:hover::before { opacity: 0.03; }
+    .finding-card:hover { border-color: var(--border-hi); }
+
+    .finding-card > * { position: relative; z-index: 1; }
+
+    .finding-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .finding-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--fg);
+      letter-spacing: -0.01em;
+      flex: 1 1 200px;
+    }
+
+    .finding-chips {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .chip {
+      font-size: 0.62rem;
+      padding: 0.2rem 0.55rem;
+      letter-spacing: 0.08em;
+      font-weight: 600;
+      text-transform: uppercase;
+      border: 1px solid var(--border-hi);
+      color: var(--mid);
+    }
+
+    .chip-white {
+      border-color: var(--fg);
+      color: var(--fg);
+    }
+
+    /* Hover-reveal description */
+    .finding-reveal {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1),
+                  opacity   0.35s ease,
+                  margin    0.35s ease;
+      opacity: 0;
+      margin-top: 0;
+    }
+
+    .finding-card:hover .finding-reveal {
+      max-height: 200px;
+      opacity: 1;
+      margin-top: 1rem;
+    }
+
+    .finding-desc {
+      font-size: 0.83rem;
+      color: var(--mid);
+      line-height: 1.65;
+      padding-top: 0.75rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .finding-desc code {
+      font-family: 'Courier New', monospace;
+      font-size: 0.8em;
+      color: var(--fg);
+      background: var(--dim);
+      padding: 0.1em 0.35em;
+    }
+
+    .finding-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.75rem;
+    }
+
+    .tag {
+      font-size: 0.62rem;
+      padding: 0.15rem 0.5rem;
+      border: 1px solid var(--border);
+      color: var(--mid);
+      letter-spacing: 0.06em;
+    }
+
+    /* ── About grid ──────────────────────────────────────────────── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+
+    @media (max-width: 580px) {
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+    }
+
+    .about-block-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 1.2rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .skill-list { list-style: none; }
+
+    .skill-list li {
+      font-size: 0.85rem;
+      color: var(--mid);
+      padding: 0.45rem 0;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: color 0.2s;
+    }
+
+    .skill-list li:hover { color: var(--fg); }
+    .skill-list li:last-child { border-bottom: none; }
+
+    .skill-arrow {
+      font-size: 0.7rem;
+      color: var(--dim);
+      transition: color 0.2s, transform 0.2s;
+    }
+
+    .skill-list li:hover .skill-arrow {
+      color: var(--fg);
+      transform: translateX(3px);
     }
 
     /* ── Footer ──────────────────────────────────────────────────── */
     footer {
       border-top: 1px solid var(--border);
-      padding: 2.5rem 0;
-      text-align: center;
+      padding: 3rem 0;
+    }
+
+    footer .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-copy {
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      color: var(--mid);
+      text-transform: uppercase;
     }
 
     .footer-links {
       display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 2rem;
-      flex-wrap: wrap;
-      margin-bottom: 1rem;
+      gap: 1.5rem;
     }
 
     .footer-links a {
-      color: var(--muted);
+      color: var(--mid);
       text-decoration: none;
-      font-size: 0.82rem;
-      letter-spacing: 0.07em;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
       display: flex;
       align-items: center;
       gap: 0.4rem;
       transition: color 0.2s;
     }
 
-    .footer-links a:hover { color: var(--green); }
+    .footer-links a:hover { color: var(--fg); }
 
-    .footer-copy {
-      font-size: 0.72rem;
-      color: var(--muted);
-      opacity: 0.5;
-    }
-
-    /* ── Scroll fade-in ──────────────────────────────────────────── */
+    /* ── Scroll reveal ───────────────────────────────────────────── */
     .reveal {
       opacity: 0;
-      transform: translateY(22px);
+      transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* Stagger children of a reveal-group */
+    .reveal-group > * {
+      opacity: 0;
+      transform: translateY(20px);
       transition: opacity 0.6s ease, transform 0.6s ease;
     }
-    .reveal.visible { opacity: 1; transform: none; }
+
+    .reveal-group.visible > *:nth-child(1) { opacity:1; transform:none; transition-delay: 0s; }
+    .reveal-group.visible > *:nth-child(2) { opacity:1; transform:none; transition-delay:0.1s; }
+    .reveal-group.visible > *:nth-child(3) { opacity:1; transform:none; transition-delay:0.2s; }
+    .reveal-group.visible > *:nth-child(4) { opacity:1; transform:none; transition-delay:0.3s; }
+
+    /* ── Keyframes ───────────────────────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: none; }
+    }
 
     /* ── Mobile ──────────────────────────────────────────────────── */
     @media (max-width: 480px) {
-      .finding-top { flex-direction: column; }
-      .nav-links { gap: 1rem; }
+      .nav-links { gap: 1.2rem; }
+      .finding-head { flex-direction: column; }
     }
   </style>
 </head>
 <body>
 
-<!-- Matrix rain canvas -->
-<canvas id="matrix-canvas"></canvas>
+<canvas id="constellation"></canvas>
 
 <!-- Nav -->
 <nav>
   <div class="container">
     <a class="nav-brand" href="#hero">krakenbutchersea</a>
     <ul class="nav-links">
-      <li><a href="#findings">findings</a></li>
-      <li><a href="#about">about</a></li>
-      <li><a href="https://github.com/ELIBELL004" target="_blank" rel="noopener">github</a></li>
-      <li><a href="https://hackerone.com/krakenbutchersea" target="_blank" rel="noopener">h1</a></li>
+      <li><a href="#findings">Findings</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="https://github.com/ELIBELL004" target="_blank" rel="noopener">GitHub</a></li>
+      <li><a href="https://hackerone.com/krakenbutchersea" target="_blank" rel="noopener">H1</a></li>
     </ul>
   </div>
 </nav>
@@ -435,48 +531,38 @@
 <section id="hero">
   <div class="container">
     <div class="hero-inner">
-      <span class="hero-tag">// security researcher</span>
-      <h1>Finding bugs<br>before <span>attackers do.</span></h1>
+      <p class="hero-eyebrow">Security Researcher · Bug Bounty Hunter</p>
+      <h1>Breaking things<br><em>responsibly.</em></h1>
       <p class="hero-sub">
-        Bug bounty hunter focused on AI/ML supply chain, web application vulnerabilities,
+        Focused on AI/ML supply chain, web application vulnerabilities,
         and server-side security. Active on HackerOne and huntr.com.
       </p>
-
       <div class="badge-row">
-        <div class="badge">
-          <span class="dot dot-green"></span>
-          HackerOne — Active
-        </div>
-        <div class="badge">
-          <span class="dot dot-green"></span>
-          huntr.com — Active
-        </div>
-        <div class="badge">
-          <span class="dot dot-orange"></span>
-          3 findings in triage / submitted
-        </div>
+        <div class="badge"><span class="pulse"></span> HackerOne — Active</div>
+        <div class="badge"><span class="pulse"></span> huntr.com — Active</div>
+        <div class="badge">3 Findings</div>
       </div>
-
       <div class="btn-row">
-        <a class="btn btn-primary" href="#findings">View Findings</a>
-        <a class="btn btn-ghost" href="https://hackerone.com/krakenbutchersea" target="_blank" rel="noopener">HackerOne Profile</a>
+        <a class="btn btn-fill" href="#findings">View Findings</a>
+        <a class="btn" href="https://hackerone.com/krakenbutchersea" target="_blank" rel="noopener">HackerOne Profile</a>
       </div>
     </div>
   </div>
 </section>
 
-<div class="divider container"></div>
+<div class="divider"></div>
 
 <!-- Findings -->
 <section id="findings">
   <div class="container">
-    <p class="section-label">// vulnerability research</p>
-    <h2 class="section-title">Bug Bounty Findings</h2>
+    <p class="section-eyebrow reveal">// Vulnerability Research</p>
+    <h2 class="section-title reveal">Bug Bounty Findings</h2>
 
-    <div class="stats-row reveal">
+    <!-- Stats -->
+    <div class="stats-row reveal-group">
       <div class="stat-box">
         <div class="stat-num">3</div>
-        <div class="stat-label">Total Findings</div>
+        <div class="stat-label">Findings</div>
       </div>
       <div class="stat-box">
         <div class="stat-num">8.6</div>
@@ -492,117 +578,120 @@
       </div>
     </div>
 
-    <div class="findings">
+    <!-- Cards -->
+    <div class="findings reveal-group">
 
-      <!-- Finding 1 — LangGraph RCE -->
-      <div class="finding-card high reveal">
-        <div class="finding-top">
+      <!-- LangGraph RCE -->
+      <div class="finding-card">
+        <div class="finding-head">
           <span class="finding-title">LangGraph PersistentDict — RCE via Unsafe Pickle Deserialization</span>
-          <div class="finding-meta">
-            <span class="chip chip-platform">GitHub Advisory</span>
-            <span class="chip chip-status-submitted">Submitted</span>
-            <span class="cvss">CVSS <strong>7.8</strong> · High</span>
+          <div class="finding-chips">
+            <span class="chip">GitHub Advisory</span>
+            <span class="chip">Submitted</span>
+            <span class="chip chip-white">CVSS 7.8</span>
           </div>
         </div>
-        <p class="finding-desc">
-          Unconditional <code>pickle.loads()</code> deserialization in
-          <code>checkpoint/memory/__init__.py</code> allows an attacker who controls
-          a checkpoint file to achieve remote code execution with no authentication required.
-          Distinct from and unreported in all 5 existing LangGraph GHSAs.
-        </p>
-        <div class="finding-tech">
-          <span class="tech-tag">Python</span>
-          <span class="tech-tag">RCE</span>
-          <span class="tech-tag">Deserialization</span>
-          <span class="tech-tag">LangGraph</span>
-          <span class="tech-tag">checkpoint/memory/__init__.py</span>
+        <div class="finding-reveal">
+          <div class="finding-desc">
+            Unconditional <code>pickle.loads()</code> deserialization in
+            <code>checkpoint/memory/__init__.py</code> allows an attacker who controls
+            a checkpoint file to achieve remote code execution with no authentication required.
+            Distinct from and unreported in all 5 existing LangGraph GHSAs.
+            <div class="finding-tags">
+              <span class="tag">Python</span>
+              <span class="tag">RCE</span>
+              <span class="tag">Deserialization</span>
+              <span class="tag">LangGraph</span>
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- Finding 2 — smolagents SSRF -->
-      <div class="finding-card high reveal">
-        <div class="finding-top">
+      <!-- smolagents SSRF -->
+      <div class="finding-card">
+        <div class="finding-head">
           <span class="finding-title">smolagents VisitWebpageTool — SSRF via Unvalidated URL</span>
-          <div class="finding-meta">
-            <span class="chip chip-platform">huntr.com</span>
-            <span class="chip chip-status-submitted">Submitted</span>
-            <span class="cvss">CVSS <strong>8.6</strong> · High</span>
+          <div class="finding-chips">
+            <span class="chip">huntr.com</span>
+            <span class="chip">Submitted</span>
+            <span class="chip chip-white">CVSS 8.6</span>
           </div>
         </div>
-        <p class="finding-desc">
-          <code>VisitWebpageTool.forward()</code> in smolagents v1.24.0 passes a caller-controlled
-          <code>url</code> parameter directly to <code>requests.get()</code> with no scheme check,
-          no private-IP denylist, and default redirect-following enabled. An attacker who can
-          influence the agent's tool input (e.g. via prompt injection) can route requests to
-          internal cloud metadata services, intranet hosts, or loopback addresses — leaking
-          credentials and instance metadata.
-        </p>
-        <div class="finding-tech">
-          <span class="tech-tag">Python</span>
-          <span class="tech-tag">SSRF</span>
-          <span class="tech-tag">AI/ML</span>
-          <span class="tech-tag">smolagents</span>
-          <span class="tech-tag">default_tools.py:491</span>
+        <div class="finding-reveal">
+          <div class="finding-desc">
+            <code>VisitWebpageTool.forward()</code> passes a caller-controlled <code>url</code>
+            directly to <code>requests.get()</code> with no scheme check, no private-IP denylist,
+            and default redirect-following. Exploitable via prompt injection to reach cloud metadata
+            services and internal hosts.
+            <div class="finding-tags">
+              <span class="tag">Python</span>
+              <span class="tag">SSRF</span>
+              <span class="tag">AI/ML</span>
+              <span class="tag">smolagents</span>
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- Finding 3 — WordPress -->
-      <div class="finding-card high reveal">
-        <div class="finding-top">
+      <!-- WordPress -->
+      <div class="finding-card">
+        <div class="finding-head">
           <span class="finding-title">WordPress — Password-Protected Post Content Leak</span>
-          <div class="finding-meta">
-            <span class="chip chip-platform">HackerOne</span>
-            <span class="chip chip-status-triage">In Triage</span>
+          <div class="finding-chips">
+            <span class="chip">HackerOne</span>
+            <span class="chip">In Triage</span>
           </div>
         </div>
-        <p class="finding-desc">
-          Password-protected WordPress posts expose content through an unguarded API endpoint,
-          allowing unauthenticated users to read post body, metadata, and attached media without
-          supplying the post password. Affects a wide range of WordPress deployments relying on
-          built-in password protection as an access control mechanism.
-        </p>
-        <div class="finding-tech">
-          <span class="tech-tag">PHP</span>
-          <span class="tech-tag">WordPress</span>
-          <span class="tech-tag">Auth Bypass</span>
-          <span class="tech-tag">REST API</span>
-          <span class="tech-tag">Information Disclosure</span>
+        <div class="finding-reveal">
+          <div class="finding-desc">
+            Password-protected WordPress posts expose content through an unguarded REST API
+            endpoint, allowing unauthenticated users to read post body, metadata, and attached
+            media without supplying the post password.
+            <div class="finding-tags">
+              <span class="tag">PHP</span>
+              <span class="tag">WordPress</span>
+              <span class="tag">Auth Bypass</span>
+              <span class="tag">REST API</span>
+            </div>
+          </div>
         </div>
       </div>
 
     </div>
+    <p style="font-size:0.7rem;color:var(--mid);margin-top:1.2rem;letter-spacing:0.06em;">
+      Hover a finding to expand details.
+    </p>
   </div>
 </section>
 
-<div class="divider container"></div>
+<div class="divider"></div>
 
 <!-- About -->
 <section id="about">
   <div class="container">
-    <p class="section-label">// about</p>
-    <h2 class="section-title">Skills &amp; Focus Areas</h2>
-
+    <p class="section-eyebrow reveal">// About</p>
+    <h2 class="section-title reveal">Skills &amp; Focus</h2>
     <div class="about-grid">
-      <div class="about-block reveal">
-        <h3>Vulnerability Classes</h3>
+      <div class="reveal">
+        <p class="about-block-label">Vulnerability Classes</p>
         <ul class="skill-list">
-          <li>Server-Side Request Forgery (SSRF)</li>
-          <li>Authentication &amp; Authorization Bypass</li>
-          <li>AI/ML Supply Chain Security</li>
-          <li>Sandbox Escape &amp; Code Execution</li>
-          <li>Information Disclosure</li>
-          <li>Injection (SQLi, XSS, SSTI)</li>
+          <li>Server-Side Request Forgery <span class="skill-arrow">→</span></li>
+          <li>Unsafe Deserialization / RCE <span class="skill-arrow">→</span></li>
+          <li>AI/ML Supply Chain Security <span class="skill-arrow">→</span></li>
+          <li>Authentication &amp; Auth Bypass <span class="skill-arrow">→</span></li>
+          <li>Information Disclosure <span class="skill-arrow">→</span></li>
+          <li>Sandbox Escape <span class="skill-arrow">→</span></li>
         </ul>
       </div>
-      <div class="about-block reveal">
-        <h3>Tools &amp; Stack</h3>
+      <div class="reveal">
+        <p class="about-block-label">Tools &amp; Stack</p>
         <ul class="skill-list">
-          <li>Burp Suite / OWASP ZAP</li>
-          <li>Python (exploit scripting)</li>
-          <li>Static source analysis</li>
-          <li>AST / bytecode inspection</li>
-          <li>Docker / cloud sandboxes</li>
-          <li>HackerOne · huntr.com</li>
+          <li>Burp Suite / OWASP ZAP <span class="skill-arrow">→</span></li>
+          <li>Python — exploit scripting <span class="skill-arrow">→</span></li>
+          <li>Static source analysis <span class="skill-arrow">→</span></li>
+          <li>AST / bytecode inspection <span class="skill-arrow">→</span></li>
+          <li>Docker / cloud sandboxes <span class="skill-arrow">→</span></li>
+          <li>HackerOne · huntr.com <span class="skill-arrow">→</span></li>
         </ul>
       </div>
     </div>
@@ -612,81 +701,111 @@
 <!-- Footer -->
 <footer>
   <div class="container">
+    <p class="footer-copy">Security Research · Responsible Disclosure</p>
     <div class="footer-links">
       <a href="https://github.com/ELIBELL004" target="_blank" rel="noopener">
-        <!-- GitHub icon -->
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
           <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.3 9.42 7.88 10.95.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.54-3.88-1.54-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.2 1.77 1.2 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.18-3.09-.12-.3-.51-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.78 0c2.2-1.49 3.16-1.18 3.16-1.18.63 1.59.24 2.75.12 3.05.74.8 1.18 1.83 1.18 3.1 0 4.43-2.7 5.4-5.27 5.69.41.36.78 1.06.78 2.13v3.16c0 .31.2.67.8.56A10.51 10.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/>
         </svg>
         ELIBELL004
       </a>
       <a href="https://hackerone.com/krakenbutchersea" target="_blank" rel="noopener">
-        <!-- HackerOne icon -->
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
           <path d="M7.09 3L4 7.77V21h3.5v-5.23h9V21H20V7.77L16.91 3zm0 10.27V8.5h9v4.77z"/>
         </svg>
         krakenbutchersea
       </a>
     </div>
-    <p class="footer-copy">security research · responsible disclosure · bug bounty</p>
   </div>
 </footer>
 
-<!-- Matrix rain -->
+<!-- Constellation -->
 <script>
 (function () {
-  const canvas = document.getElementById('matrix-canvas');
-  const ctx = canvas.getContext('2d');
-
-  const CHARS = 'アイウエオカキクケコサシスセソタチツテトナニヌネノ0123456789ABCDEF<>{}[]|/\\';
-  const FONT_SIZE = 13;
-  let cols, drops;
+  const canvas = document.getElementById('constellation');
+  const ctx    = canvas.getContext('2d');
+  const COUNT  = 55;
+  const DIST   = 160;
+  let W, H, pts;
 
   function resize() {
-    canvas.width  = window.innerWidth;
-    canvas.height = window.innerHeight;
-    cols  = Math.floor(canvas.width / FONT_SIZE);
-    drops = Array.from({ length: cols }, () => Math.random() * -100);
+    W = canvas.width  = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+
+  function makePts() {
+    pts = Array.from({ length: COUNT }, () => ({
+      x:  Math.random() * W,
+      y:  Math.random() * H,
+      vx: (Math.random() - 0.5) * 0.28,
+      vy: (Math.random() - 0.5) * 0.28,
+      r:  Math.random() * 1.5 + 0.5,
+    }));
   }
 
   resize();
-  window.addEventListener('resize', resize);
-
-  ctx.font = `${FONT_SIZE}px monospace`;
+  makePts();
+  window.addEventListener('resize', () => { resize(); makePts(); });
 
   function draw() {
-    ctx.fillStyle = 'rgba(10, 14, 13, 0.045)';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.clearRect(0, 0, W, H);
 
-    for (let i = 0; i < cols; i++) {
-      const char = CHARS[Math.floor(Math.random() * CHARS.length)];
-      const x = i * FONT_SIZE;
-      const y = drops[i] * FONT_SIZE;
-
-      // Head char brighter
-      ctx.fillStyle = '#00ff88';
-      ctx.fillText(char, x, y);
-
-      if (drops[i] * FONT_SIZE > canvas.height && Math.random() > 0.975) {
-        drops[i] = 0;
-      }
-      drops[i] += 0.5;
+    // move
+    for (const p of pts) {
+      p.x += p.vx;
+      p.y += p.vy;
+      if (p.x < 0 || p.x > W) p.vx *= -1;
+      if (p.y < 0 || p.y > H) p.vy *= -1;
     }
+
+    // lines
+    for (let i = 0; i < pts.length; i++) {
+      for (let j = i + 1; j < pts.length; j++) {
+        const dx = pts[i].x - pts[j].x;
+        const dy = pts[i].y - pts[j].y;
+        const d  = Math.sqrt(dx*dx + dy*dy);
+        if (d < DIST) {
+          ctx.beginPath();
+          ctx.moveTo(pts[i].x, pts[i].y);
+          ctx.lineTo(pts[j].x, pts[j].y);
+          ctx.strokeStyle = `rgba(255,255,255,${(1 - d / DIST) * 0.4})`;
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
+        }
+      }
+    }
+
+    // dots
+    for (const p of pts) {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255,255,255,0.7)';
+      ctx.fill();
+    }
+
+    requestAnimationFrame(draw);
   }
 
-  setInterval(draw, 50);
+  draw();
 })();
 </script>
 
 <!-- Scroll reveal -->
 <script>
 (function () {
-  const els = document.querySelectorAll('.reveal');
-  const io  = new IntersectionObserver(
-    (entries) => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
-    { threshold: 0.12 }
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          io.unobserve(e.target);
+        }
+      });
+    },
+    { threshold: 0.1 }
   );
-  els.forEach(el => io.observe(el));
+
+  document.querySelectorAll('.reveal, .reveal-group').forEach(el => io.observe(el));
 })();
 </script>
 
