@@ -496,6 +496,11 @@
     .reveal-group.visible > *:nth-child(2) { opacity:1; transform:none; transition-delay:0.1s; }
     .reveal-group.visible > *:nth-child(3) { opacity:1; transform:none; transition-delay:0.2s; }
     .reveal-group.visible > *:nth-child(4) { opacity:1; transform:none; transition-delay:0.3s; }
+    .reveal-group.visible > *:nth-child(5) { opacity:1; transform:none; transition-delay:0.4s; }
+    .reveal-group.visible > *:nth-child(6) { opacity:1; transform:none; transition-delay:0.5s; }
+    .reveal-group.visible > *:nth-child(7) { opacity:1; transform:none; transition-delay:0.6s; }
+    .reveal-group.visible > *:nth-child(8) { opacity:1; transform:none; transition-delay:0.7s; }
+    .reveal-group.visible > *:nth-child(9) { opacity:1; transform:none; transition-delay:0.8s; }
 
     /* ── Keyframes ───────────────────────────────────────────────── */
     @keyframes fadeUp {
@@ -540,7 +545,7 @@
       <div class="badge-row">
         <div class="badge"><span class="pulse"></span> HackerOne — Active</div>
         <div class="badge"><span class="pulse"></span> huntr.com — Active</div>
-        <div class="badge">3 Findings</div>
+        <div class="badge">9 Findings</div>
       </div>
       <div class="btn-row">
         <a class="btn btn-fill" href="#findings">View Findings</a>
@@ -561,11 +566,11 @@
     <!-- Stats -->
     <div class="stats-row reveal-group">
       <div class="stat-box">
-        <div class="stat-num">3</div>
+        <div class="stat-num">9</div>
         <div class="stat-label">Findings</div>
       </div>
       <div class="stat-box">
-        <div class="stat-num">8.6</div>
+        <div class="stat-num">9.8</div>
         <div class="stat-label">Highest CVSS</div>
       </div>
       <div class="stat-box">
@@ -652,6 +657,165 @@
               <span class="tag">WordPress</span>
               <span class="tag">Auth Bypass</span>
               <span class="tag">REST API</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- anything-llm Prompt Injection -->
+      <div class="finding-card">
+        <div class="finding-head">
+          <span class="finding-title">anything-llm — Persistent Cross-User Prompt Injection via Agent Memory Store</span>
+          <div class="finding-chips">
+            <span class="chip">huntr.com</span>
+            <span class="chip">Submitted</span>
+            <span class="chip chip-white">CVSS 9.1</span>
+          </div>
+        </div>
+        <div class="finding-reveal">
+          <div class="finding-desc">
+            Agent memory entries are written to a shared vector store with no per-user isolation.
+            An attacker poisons the RAG memory store via the unauthenticated embed endpoint,
+            injecting a system-prompt override that persists across all users and all 36 supported
+            LLM providers. No authentication required to trigger the injection.
+            <div class="finding-tags">
+              <span class="tag">AI/ML</span>
+              <span class="tag">Prompt Injection</span>
+              <span class="tag">RAG Poisoning</span>
+              <span class="tag">anything-llm</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ragas SSRF -->
+      <div class="finding-card">
+        <div class="finding-head">
+          <span class="finding-title">ragas — SSRF in call_ag_ui_endpoint / run_ag_ui_row</span>
+          <div class="finding-chips">
+            <span class="chip">huntr.com</span>
+            <span class="chip">Submitted</span>
+            <span class="chip chip-white">CVSS 8.6</span>
+          </div>
+        </div>
+        <div class="finding-reveal">
+          <div class="finding-desc">
+            <code>call_ag_ui_endpoint()</code> constructs a URL from caller-controlled input and
+            passes it to <code>httpx</code> with <code>follow_redirects=True</code>. The existing
+            <code>_is_safe_url_target()</code> check in the same file is not applied, allowing
+            SSRF to cloud metadata services and internal hosts.
+            <div class="finding-tags">
+              <span class="tag">Python</span>
+              <span class="tag">SSRF</span>
+              <span class="tag">AI/ML</span>
+              <span class="tag">ragas</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- keras TFSMLayer -->
+      <div class="finding-card">
+        <div class="finding-head">
+          <span class="finding-title">keras — TFSMLayer.__init__ safe_mode Bypass (Incomplete Fix CVE-2026-1462)</span>
+          <div class="finding-chips">
+            <span class="chip">huntr.com</span>
+            <span class="chip">Submitted</span>
+            <span class="chip chip-white">CVSS 8.8</span>
+          </div>
+        </div>
+        <div class="finding-reveal">
+          <div class="finding-desc">
+            <code>TFSMLayer.__init__</code> calls <code>tf.saved_model.load()</code> with no
+            <code>safe_mode</code> guard, directly bypassing the patch applied to
+            <code>from_config()</code>. Loading a malicious SavedModel via the constructor
+            achieves arbitrary code execution, rendering the prior CVE fix incomplete.
+            <div class="finding-tags">
+              <span class="tag">Python</span>
+              <span class="tag">RCE</span>
+              <span class="tag">Sandbox Bypass</span>
+              <span class="tag">keras</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- keras _unpickle_model -->
+      <div class="finding-card">
+        <div class="finding-head">
+          <span class="finding-title">keras — Hardcoded safe_mode=False in _unpickle_model + Systematic Missing Propagation</span>
+          <div class="finding-chips">
+            <span class="chip">huntr.com</span>
+            <span class="chip">Submitted</span>
+            <span class="chip chip-white">CVSS 9.8</span>
+          </div>
+        </div>
+        <div class="finding-reveal">
+          <div class="finding-desc">
+            <code>_unpickle_model()</code> hardcodes <code>safe_mode=False</code>
+            unconditionally. Eight additional call sites across <code>JaxLayer</code>,
+            <code>FlaxLayer</code>, <code>TextVectorization</code>, <code>RNN</code>, and
+            <code>Distiller</code> also fail to propagate <code>safe_mode</code>, silently
+            disabling the security control for all pickle-based deserialization paths.
+            <div class="finding-tags">
+              <span class="tag">Python</span>
+              <span class="tag">RCE</span>
+              <span class="tag">Deserialization</span>
+              <span class="tag">keras</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- joblib Path Traversal RCE -->
+      <div class="finding-card">
+        <div class="finding-head">
+          <span class="finding-title">joblib — Path Traversal in NDArrayWrapper/ZNDArrayWrapper → RCE Chain</span>
+          <div class="finding-chips">
+            <span class="chip">huntr MFV</span>
+            <span class="chip">Submitted</span>
+            <span class="chip chip-white">High</span>
+          </div>
+        </div>
+        <div class="finding-reveal">
+          <div class="finding-desc">
+            <code>NDArrayWrapper.read()</code> and <code>ZNDArrayWrapper.read()</code> use
+            <code>self.filename</code> from an attacker-controlled pickle stream as the argument
+            to <code>os.path.join()</code> and then <code>np.load(allow_pickle=True)</code>.
+            Traversal to an attacker-staged <code>.npy</code> file chains into full RCE.
+            <div class="finding-tags">
+              <span class="tag">Python</span>
+              <span class="tag">Path Traversal</span>
+              <span class="tag">RCE</span>
+              <span class="tag">joblib</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- h5py Path Traversal -->
+      <div class="finding-card">
+        <div class="finding-head">
+          <span class="finding-title">h5py — Path Traversal via ExternalLink + VirtualSource</span>
+          <div class="finding-chips">
+            <span class="chip">huntr.com</span>
+            <span class="chip">Submitted</span>
+            <span class="chip chip-white">CVSS 7.4</span>
+          </div>
+        </div>
+        <div class="finding-reveal">
+          <div class="finding-desc">
+            <code>h5py.ExternalLink(filename, path)</code> and
+            <code>VirtualSource(path, ...)</code> store attacker-controlled paths with zero
+            validation. The HDF5 C library resolves relative paths relative to the model file's
+            directory, enabling <code>../../</code> traversal. The library's own docstring states
+            "No checking is performed." Confirmed PoC reads arbitrary HDF5 files and leaks a
+            file-existence oracle via differing error messages.
+            <div class="finding-tags">
+              <span class="tag">Python</span>
+              <span class="tag">Path Traversal</span>
+              <span class="tag">Information Disclosure</span>
+              <span class="tag">h5py</span>
             </div>
           </div>
         </div>
