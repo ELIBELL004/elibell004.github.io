@@ -508,6 +508,166 @@
       to   { opacity: 1; transform: none; }
     }
 
+    /* ── Quant diagram ───────────────────────────────────────────── */
+    .quant-intro {
+      font-size: 0.9rem;
+      color: var(--mid);
+      max-width: 520px;
+      margin-bottom: 2.5rem;
+      line-height: 1.6;
+    }
+
+    .pipeline {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .pipe-source {
+      width: 100%;
+      border: 1px solid var(--border-hi);
+      background: var(--card-bg);
+      padding: 0.9rem 1.2rem;
+      text-align: center;
+    }
+
+    .pipe-source-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 0.25rem;
+    }
+
+    .pipe-source-sub {
+      font-size: 0.82rem;
+      color: var(--fg);
+      font-weight: 600;
+    }
+
+    .pipe-connector {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: var(--dim);
+      font-size: 0.9rem;
+      padding: 0.35rem 0;
+      line-height: 1.2;
+      user-select: none;
+    }
+
+    .pipe-stages {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--border);
+      width: 100%;
+      border: 1px solid var(--border);
+    }
+
+    @media (max-width: 640px) {
+      .pipe-stages { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .pipe-stage {
+      background: var(--card-bg);
+      padding: 1.2rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .pipe-stage-num {
+      font-size: 0.58rem;
+      letter-spacing: 0.14em;
+      color: var(--dim);
+      font-family: 'Courier New', monospace;
+    }
+
+    .pipe-stage-name {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--fg);
+    }
+
+    .pipe-stage-desc {
+      font-size: 0.72rem;
+      color: var(--mid);
+      line-height: 1.5;
+      flex: 1;
+    }
+
+    .pipe-stage-cond {
+      font-size: 0.68rem;
+      font-family: 'Courier New', monospace;
+      color: var(--fg);
+      background: var(--dim);
+      padding: 0.2rem 0.5rem;
+      display: inline-block;
+      margin-top: 0.3rem;
+      border: 1px solid var(--border-hi);
+      align-self: flex-start;
+    }
+
+    .pipe-no-gate {
+      color: var(--mid) !important;
+      background: transparent !important;
+      border-color: var(--border) !important;
+    }
+
+    .pipe-gate {
+      width: 100%;
+      border: 1px solid var(--border-hi);
+      background: var(--card-bg);
+      padding: 1rem 1.4rem;
+      text-align: center;
+    }
+
+    .pipe-gate-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 0.5rem;
+    }
+
+    .pipe-gate-rule {
+      font-size: 0.8rem;
+      font-family: 'Courier New', monospace;
+      color: var(--fg);
+    }
+
+    .pipe-outputs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      width: 100%;
+      border: 1px solid var(--border);
+    }
+
+    .pipe-output {
+      background: var(--card-bg);
+      padding: 1rem 1.2rem;
+      text-align: center;
+    }
+
+    .pipe-out-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .pipe-output-on .pipe-out-label { color: var(--fg); }
+    .pipe-output-off .pipe-out-label { color: var(--mid); }
+
+    .pipe-out-desc {
+      font-size: 0.75rem;
+      color: var(--mid);
+      margin-top: 0.3rem;
+    }
+
     /* ── Mobile ──────────────────────────────────────────────────── */
     @media (max-width: 480px) {
       .nav-links { gap: 1.2rem; }
@@ -525,6 +685,7 @@
     <a class="nav-brand" href="#hero">krakenbutchersea</a>
     <ul class="nav-links">
       <li><a href="#findings">Findings</a></li>
+      <li><a href="#quant">Quant</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="https://github.com/ELIBELL004" target="_blank" rel="noopener">GitHub</a></li>
       <li><a href="https://hackerone.com/krakenbutchersea" target="_blank" rel="noopener">H1</a></li>
@@ -824,6 +985,86 @@
     </div>
     <p style="font-size:0.7rem;color:var(--mid);margin-top:1.2rem;letter-spacing:0.06em;">
       Hover a finding to expand details.
+    </p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- Quant Models -->
+<section id="quant">
+  <div class="container">
+    <p class="section-eyebrow reveal">// Quantitative Finance</p>
+    <h2 class="section-title reveal">Quant Models</h2>
+    <p class="quant-intro reveal">
+      Four-stage signal system for QQQ using volume-synchronized probability of informed trading.
+      All three gate conditions must pass for a non-zero position signal.
+    </p>
+
+    <div class="pipeline reveal">
+
+      <!-- Source -->
+      <div class="pipe-source">
+        <div class="pipe-source-label">Input</div>
+        <div class="pipe-source-sub">OHLCV &amp; Volume Data — QQQ</div>
+      </div>
+
+      <div class="pipe-connector">│<br>↓</div>
+
+      <!-- Four stages -->
+      <div class="pipe-stages">
+        <div class="pipe-stage">
+          <span class="pipe-stage-num">STAGE 01</span>
+          <span class="pipe-stage-name">VPIN</span>
+          <span class="pipe-stage-desc">Bulk Volume Classification → volume-synchronized probability of informed trading</span>
+          <span class="pipe-stage-cond">VPIN &lt; 0.50</span>
+        </div>
+        <div class="pipe-stage">
+          <span class="pipe-stage-num">STAGE 02</span>
+          <span class="pipe-stage-name">PSR + Kelly</span>
+          <span class="pipe-stage-desc">Probabilistic Sharpe Ratio significance test + fractional Kelly position sizing</span>
+          <span class="pipe-stage-cond">PSR &gt; 0.80</span>
+        </div>
+        <div class="pipe-stage">
+          <span class="pipe-stage-num">STAGE 03</span>
+          <span class="pipe-stage-name">VAR(1) Regime</span>
+          <span class="pipe-stage-desc">Companion matrix max eigenvalue → market regime filter</span>
+          <span class="pipe-stage-cond">|&#955;| &lt; 0.95</span>
+        </div>
+        <div class="pipe-stage">
+          <span class="pipe-stage-num">STAGE 04</span>
+          <span class="pipe-stage-name">EF3M</span>
+          <span class="pipe-stage-desc">EM Gaussian mixture → return distribution characterisation</span>
+          <span class="pipe-stage-cond pipe-no-gate">distribution fit</span>
+        </div>
+      </div>
+
+      <div class="pipe-connector">│<br>↓</div>
+
+      <!-- Signal Gate -->
+      <div class="pipe-gate">
+        <div class="pipe-gate-label">Signal Gate</div>
+        <div class="pipe-gate-rule">VPIN &lt; 0.50 &nbsp;&amp;&amp;&nbsp; |&#955;| &lt; 0.95 &nbsp;&amp;&amp;&nbsp; PSR &gt; 0.80</div>
+      </div>
+
+      <div class="pipe-connector">│<br>↓</div>
+
+      <!-- Outputs -->
+      <div class="pipe-outputs">
+        <div class="pipe-output pipe-output-on">
+          <div class="pipe-out-label">Signal On</div>
+          <div class="pipe-out-desc">Kelly-sized long position</div>
+        </div>
+        <div class="pipe-output pipe-output-off">
+          <div class="pipe-out-label">Signal Off</div>
+          <div class="pipe-out-desc">Flat — no position</div>
+        </div>
+      </div>
+
+    </div>
+
+    <p style="font-size:0.7rem;color:var(--mid);margin-top:1.2rem;letter-spacing:0.06em;">
+      Stages 01–03 gate the signal. Stage 04 characterises the return distribution.
     </p>
   </div>
 </section>
